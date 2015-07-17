@@ -9,10 +9,15 @@
 /* Begin PBXBuildFile section */
 		9B71DA471B59170B007AD280 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B71DA461B59170B007AD280 /* main.m */; };
 		9B71DA4A1B59170B007AD280 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B71DA491B59170B007AD280 /* AppDelegate.m */; };
-		9B71DA4D1B59170B007AD280 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B71DA4C1B59170B007AD280 /* ViewController.m */; };
-		9B71DA501B59170B007AD280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B71DA4E1B59170B007AD280 /* Main.storyboard */; };
 		9B71DA521B59170B007AD280 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B71DA511B59170B007AD280 /* Images.xcassets */; };
 		9B71DA611B59170B007AD280 /* MeiTuan_HDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B71DA601B59170B007AD280 /* MeiTuan_HDTests.m */; };
+		9B90E0191B5920D20049A9CA /* MTHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B90E0181B5920D20049A9CA /* MTHomeViewController.m */; };
+		9B90E01C1B5923590049A9CA /* MTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B90E01B1B5923590049A9CA /* MTNavigationController.m */; };
+		9B90E01F1B5925A50049A9CA /* MTConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B90E01E1B5925A50049A9CA /* MTConst.m */; };
+		9B90E0241B59299D0049A9CA /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B90E0211B59299D0049A9CA /* UIBarButtonItem+Extension.m */; };
+		9B90E0251B59299D0049A9CA /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B90E0231B59299D0049A9CA /* UIView+Extension.m */; };
+		9B90E0271B592FD10049A9CA /* MTHomeLeftTopMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B90E0261B592FD10049A9CA /* MTHomeLeftTopMenu.xib */; };
+		9B90E02A1B5936CB0049A9CA /* MTHomeLeftTopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B90E0291B5936CB0049A9CA /* MTHomeLeftTopMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,13 +36,23 @@
 		9B71DA461B59170B007AD280 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9B71DA481B59170B007AD280 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9B71DA491B59170B007AD280 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9B71DA4B1B59170B007AD280 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9B71DA4C1B59170B007AD280 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9B71DA4F1B59170B007AD280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9B71DA511B59170B007AD280 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9B71DA5A1B59170B007AD280 /* MeiTuan_HDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeiTuan_HDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B71DA5F1B59170B007AD280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B71DA601B59170B007AD280 /* MeiTuan_HDTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeiTuan_HDTests.m; sourceTree = "<group>"; };
+		9B90E0171B5920D20049A9CA /* MTHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTHomeViewController.h; sourceTree = "<group>"; };
+		9B90E0181B5920D20049A9CA /* MTHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTHomeViewController.m; sourceTree = "<group>"; };
+		9B90E01A1B5923590049A9CA /* MTNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTNavigationController.h; sourceTree = "<group>"; };
+		9B90E01B1B5923590049A9CA /* MTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTNavigationController.m; sourceTree = "<group>"; };
+		9B90E01D1B5925A50049A9CA /* MTConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTConst.h; sourceTree = "<group>"; };
+		9B90E01E1B5925A50049A9CA /* MTConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTConst.m; sourceTree = "<group>"; };
+		9B90E0201B59299D0049A9CA /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
+		9B90E0211B59299D0049A9CA /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
+		9B90E0221B59299D0049A9CA /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		9B90E0231B59299D0049A9CA /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		9B90E0261B592FD10049A9CA /* MTHomeLeftTopMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTHomeLeftTopMenu.xib; sourceTree = "<group>"; };
+		9B90E0281B5936CB0049A9CA /* MTHomeLeftTopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTHomeLeftTopMenu.h; sourceTree = "<group>"; };
+		9B90E0291B5936CB0049A9CA /* MTHomeLeftTopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTHomeLeftTopMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +96,19 @@
 			children = (
 				9B71DA481B59170B007AD280 /* AppDelegate.h */,
 				9B71DA491B59170B007AD280 /* AppDelegate.m */,
-				9B71DA4B1B59170B007AD280 /* ViewController.h */,
-				9B71DA4C1B59170B007AD280 /* ViewController.m */,
-				9B71DA4E1B59170B007AD280 /* Main.storyboard */,
+				9B90E0201B59299D0049A9CA /* UIBarButtonItem+Extension.h */,
+				9B90E0211B59299D0049A9CA /* UIBarButtonItem+Extension.m */,
+				9B90E0221B59299D0049A9CA /* UIView+Extension.h */,
+				9B90E0231B59299D0049A9CA /* UIView+Extension.m */,
+				9B90E01A1B5923590049A9CA /* MTNavigationController.h */,
+				9B90E01B1B5923590049A9CA /* MTNavigationController.m */,
+				9B90E0171B5920D20049A9CA /* MTHomeViewController.h */,
+				9B90E0181B5920D20049A9CA /* MTHomeViewController.m */,
+				9B90E0281B5936CB0049A9CA /* MTHomeLeftTopMenu.h */,
+				9B90E0291B5936CB0049A9CA /* MTHomeLeftTopMenu.m */,
+				9B90E0261B592FD10049A9CA /* MTHomeLeftTopMenu.xib */,
+				9B90E01D1B5925A50049A9CA /* MTConst.h */,
+				9B90E01E1B5925A50049A9CA /* MTConst.m */,
 				9B71DA511B59170B007AD280 /* Images.xcassets */,
 				9B71DA441B59170B007AD280 /* Supporting Files */,
 			);
@@ -160,6 +185,7 @@
 		9B71DA391B59170B007AD280 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MT;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = WayneLiu;
 				TargetAttributes = {
@@ -196,8 +222,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B71DA501B59170B007AD280 /* Main.storyboard in Resources */,
 				9B71DA521B59170B007AD280 /* Images.xcassets in Resources */,
+				9B90E0271B592FD10049A9CA /* MTHomeLeftTopMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,9 +241,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B71DA4D1B59170B007AD280 /* ViewController.m in Sources */,
+				9B90E0241B59299D0049A9CA /* UIBarButtonItem+Extension.m in Sources */,
+				9B90E01C1B5923590049A9CA /* MTNavigationController.m in Sources */,
 				9B71DA4A1B59170B007AD280 /* AppDelegate.m in Sources */,
+				9B90E02A1B5936CB0049A9CA /* MTHomeLeftTopMenu.m in Sources */,
+				9B90E0251B59299D0049A9CA /* UIView+Extension.m in Sources */,
+				9B90E0191B5920D20049A9CA /* MTHomeViewController.m in Sources */,
 				9B71DA471B59170B007AD280 /* main.m in Sources */,
+				9B90E01F1B5925A50049A9CA /* MTConst.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,17 +269,6 @@
 			targetProxy = 9B71DA5B1B59170B007AD280 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		9B71DA4E1B59170B007AD280 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9B71DA4F1B59170B007AD280 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9B71DA621B59170B007AD280 /* Debug */ = {

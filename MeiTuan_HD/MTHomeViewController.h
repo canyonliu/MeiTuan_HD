@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MTHomeViewController.h
 //  MeiTuan_HD
 //
 //  Created by WayneLiu on 15/7/17.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MTHomeViewController : UICollectionViewController
 
 @end
-
