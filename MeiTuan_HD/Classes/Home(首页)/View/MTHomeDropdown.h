@@ -12,4 +12,6 @@
 
 +(instancetype)dropdown;
 
+@property (nonatomic, strong)NSArray *categories;
+
 @end
