@@ -12,4 +12,10 @@
 
 +(instancetype)item;
 
+/**
+ *  设置点击的监听器
+ *
+ */
+-(void)addTarget:(id)target action:(SEL)action;
+
 @end

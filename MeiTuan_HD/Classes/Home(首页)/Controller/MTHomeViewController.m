@@ -45,12 +45,15 @@ static NSString * const reuseIdentifier = @"Cell";
     
     //2.类别
     MTHomeLeftTopMenu *categoryMenu = [MTHomeLeftTopMenu item];
+    [categoryMenu addTarget:self action:@selector(categoryClicked)];
     UIBarButtonItem *catrgoryBar = [[UIBarButtonItem alloc]initWithCustomView:categoryMenu];
     //3.地区
     MTHomeLeftTopMenu *districtMenu = [MTHomeLeftTopMenu item];
+    [districtMenu addTarget:self action:@selector(districtClicked)];
     UIBarButtonItem *districtBar = [[UIBarButtonItem alloc]initWithCustomView:districtMenu];
     //4.排序
     MTHomeLeftTopMenu *sortMenu = [MTHomeLeftTopMenu item];
+    [sortMenu addTarget:self action:@selector(sortClicked)];
     UIBarButtonItem *sortBar = [[UIBarButtonItem alloc]initWithCustomView:sortMenu];
     
     
@@ -70,6 +73,21 @@ static NSString * const reuseIdentifier = @"Cell";
     
 }
 
+
+#pragma mark -m 顶部menu的点击方法
+
+- (void)categoryClicked{
+    MTLog(@"categoryClicked");
+    
+}
+
+- (void)districtClicked{
+    
+}
+
+- (void)sortClicked{
+    
+}
 
 
 #pragma mark <UICollectionViewDataSource>
