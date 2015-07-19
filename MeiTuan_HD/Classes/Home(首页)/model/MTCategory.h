@@ -10,7 +10,7 @@
 
 @interface MTCategory : NSObject
 
-@property (nonatomic, strong)NSArray *subArray;
+@property (nonatomic, strong)NSArray *subcategories;
 
 
 @property (nonatomic, copy)NSString *name;

@@ -37,8 +37,8 @@
     dropDown.categories = [MTCategory objectArrayWithFilename:@"categories.plist"];
     [self.view addSubview:dropDown];
     
-//    // 设置控制器view在popover中的尺寸
-//    self.preferredContentSize = dropDown.size;
+    // 设置控制器view在popover中的尺寸
+    self.preferredContentSize = dropDown.size;
 }
 
 

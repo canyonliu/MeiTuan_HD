@@ -8,11 +8,16 @@
 
 #import "MTHomeDropdown.h"
 #import "MTCategory.h"
+#import "MTHomeDropdownMainCell.h"
+#import "MTHomeDropdownSubCell.h"
 
 @interface MTHomeDropdown() <UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
+@property (weak, nonatomic) IBOutlet UITableView *subTableView;
 
+
+@property (nonatomic, strong)MTCategory *selectedCategory;
 
 @end
 
@@ -40,31 +45,67 @@
 
 #pragma mark -m 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.categories.count;
+    if(tableView == self.mainTableView){
+        return self.categories.count;
+    }else{
+        return self.selectedCategory.subcategories.count;
+    }
+    
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *ID =@"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
-    if(!cell){
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+    UITableViewCell *cell = nil;
+    
+    if(tableView == self.mainTableView){
+        cell = [MTHomeDropdownMainCell cellWithTableView:tableView];
+        //显示文字
+        MTCategory *category = self.categories[indexPath.row];
+        cell.textLabel.text = category.name;
+        cell.imageView.image = [UIImage imageNamed:category.small_icon];
+        
+        if(category.subcategories.count){
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            
+        }
+
+    }else{
+        static NSString *subID =@"sub-cell";
+        cell = [MTHomeDropdownSubCell cellWithTableView:tableView];
+        
+        if(!cell){
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:subID];
+            cell.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg_dropdown_rightpart"]];
+            cell.selectedBackgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg_dropdown_right_selected"]];
+        }
+        cell.textLabel.text = self.selectedCategory.subcategories[indexPath.row];
+//        cell.imageView.image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@""]];
+        
+        
     }
     
     
-    MTCategory *category = self.categories[indexPath.row];
-    cell.textLabel.text = category.name;
-    cell.imageView.image = [UIImage imageNamed:category.small_icon];
     
-    
-    
+   
     return cell;
 }
 
 
 #pragma mark -m 数据代理方法
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(tableView  == self.mainTableView){
+        self.selectedCategory = self.categories[indexPath.row];
+        [self.subTableView reloadData];
+    }
+    
 
+    
+}
 
 
 @end
