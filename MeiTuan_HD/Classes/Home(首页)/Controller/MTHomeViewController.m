@@ -12,6 +12,8 @@
 #import "UIView+Extension.h"
 #import "MTHomeLeftTopMenu.h"
 #import "MTCategoryViewController.h"
+#import "MTDistrictViewController.h"
+
 
 @interface MTHomeViewController ()
 
@@ -93,12 +95,15 @@ static NSString * const reuseIdentifier = @"Cell";
     UIPopoverController *popover = [[UIPopoverController alloc]initWithContentViewController:[[MTCategoryViewController alloc]init] ];
     
     [popover presentPopoverFromBarButtonItem:self.categoryMenu permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    self.popover = popover;
+//    self.popover = popover;
     
 }
 
 - (void)districtClicked{
     
+    UIPopoverController *popover = [[UIPopoverController alloc]initWithContentViewController:[[MTDistrictViewController alloc]init] ];
+    
+    [popover presentPopoverFromBarButtonItem:self.districtMenu permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)sortClicked{

@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B274B7D1B5BBADD008D4394 /* MTCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B274B7C1B5BBADD008D4394 /* MTCity.m */; };
+		9B274B801B5BBB8E008D4394 /* MTRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B274B7F1B5BBB8E008D4394 /* MTRegion.m */; };
+		9B274B831B5BBF0B008D4394 /* MTCityGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B274B821B5BBF0B008D4394 /* MTCityGroup.m */; };
 		9B6AE5141B5BA50800F9286C /* MTHomeDropdownMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6AE5131B5BA50800F9286C /* MTHomeDropdownMainCell.m */; };
 		9B6AE5171B5BA52200F9286C /* MTHomeDropdownSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6AE5161B5BA52200F9286C /* MTHomeDropdownSubCell.m */; };
+		9B6AE5201B5BAC1700F9286C /* MTDistrictViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6AE51E1B5BAC1700F9286C /* MTDistrictViewController.m */; };
+		9B6AE5211B5BAC1700F9286C /* MTDistrictViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6AE51F1B5BAC1700F9286C /* MTDistrictViewController.xib */; };
+		9B6AE5251B5BB36B00F9286C /* MTCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6AE5231B5BB36B00F9286C /* MTCityViewController.m */; };
+		9B6AE5261B5BB36B00F9286C /* MTCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B6AE5241B5BB36B00F9286C /* MTCityViewController.xib */; };
 		9B71DA521B59170B007AD280 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B71DA511B59170B007AD280 /* Images.xcassets */; };
 		9B71DA611B59170B007AD280 /* MeiTuan_HDTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B71DA601B59170B007AD280 /* MeiTuan_HDTests.m */; };
 		9BDE218A1B5A999000CEA6F8 /* MTHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE21741B5A999000CEA6F8 /* MTHomeViewController.m */; };
@@ -61,10 +68,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B274B7B1B5BBADD008D4394 /* MTCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTCity.h; sourceTree = "<group>"; };
+		9B274B7C1B5BBADD008D4394 /* MTCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTCity.m; sourceTree = "<group>"; };
+		9B274B7E1B5BBB8E008D4394 /* MTRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRegion.h; sourceTree = "<group>"; };
+		9B274B7F1B5BBB8E008D4394 /* MTRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRegion.m; sourceTree = "<group>"; };
+		9B274B811B5BBF0B008D4394 /* MTCityGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTCityGroup.h; sourceTree = "<group>"; };
+		9B274B821B5BBF0B008D4394 /* MTCityGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTCityGroup.m; sourceTree = "<group>"; };
 		9B6AE5121B5BA50800F9286C /* MTHomeDropdownMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTHomeDropdownMainCell.h; sourceTree = "<group>"; };
 		9B6AE5131B5BA50800F9286C /* MTHomeDropdownMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTHomeDropdownMainCell.m; sourceTree = "<group>"; };
 		9B6AE5151B5BA52200F9286C /* MTHomeDropdownSubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTHomeDropdownSubCell.h; sourceTree = "<group>"; };
 		9B6AE5161B5BA52200F9286C /* MTHomeDropdownSubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTHomeDropdownSubCell.m; sourceTree = "<group>"; };
+		9B6AE51D1B5BAC1700F9286C /* MTDistrictViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDistrictViewController.h; sourceTree = "<group>"; };
+		9B6AE51E1B5BAC1700F9286C /* MTDistrictViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDistrictViewController.m; sourceTree = "<group>"; };
+		9B6AE51F1B5BAC1700F9286C /* MTDistrictViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTDistrictViewController.xib; sourceTree = "<group>"; };
+		9B6AE5221B5BB36B00F9286C /* MTCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTCityViewController.h; sourceTree = "<group>"; };
+		9B6AE5231B5BB36B00F9286C /* MTCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTCityViewController.m; sourceTree = "<group>"; };
+		9B6AE5241B5BB36B00F9286C /* MTCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MTCityViewController.xib; sourceTree = "<group>"; };
 		9B71DA411B59170B007AD280 /* MeiTuan_HD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeiTuan_HD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B71DA451B59170B007AD280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B71DA511B59170B007AD280 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -244,6 +263,12 @@
 				9BDE21741B5A999000CEA6F8 /* MTHomeViewController.m */,
 				9BDE21981B5AA14D00CEA6F8 /* MTCategoryViewController.h */,
 				9BDE21991B5AA14D00CEA6F8 /* MTCategoryViewController.m */,
+				9B6AE51D1B5BAC1700F9286C /* MTDistrictViewController.h */,
+				9B6AE51E1B5BAC1700F9286C /* MTDistrictViewController.m */,
+				9B6AE51F1B5BAC1700F9286C /* MTDistrictViewController.xib */,
+				9B6AE5221B5BB36B00F9286C /* MTCityViewController.h */,
+				9B6AE5231B5BB36B00F9286C /* MTCityViewController.m */,
+				9B6AE5241B5BB36B00F9286C /* MTCityViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -253,6 +278,12 @@
 			children = (
 				9BDE21A41B5AA48700CEA6F8 /* MTCategory.h */,
 				9BDE21A51B5AA48700CEA6F8 /* MTCategory.m */,
+				9B274B7B1B5BBADD008D4394 /* MTCity.h */,
+				9B274B7C1B5BBADD008D4394 /* MTCity.m */,
+				9B274B7E1B5BBB8E008D4394 /* MTRegion.h */,
+				9B274B7F1B5BBB8E008D4394 /* MTRegion.m */,
+				9B274B811B5BBF0B008D4394 /* MTCityGroup.h */,
+				9B274B821B5BBF0B008D4394 /* MTCityGroup.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -478,9 +509,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B6AE5261B5BB36B00F9286C /* MTCityViewController.xib in Resources */,
 				9BDE21A01B5AA44C00CEA6F8 /* categories.plist in Resources */,
 				9B71DA521B59170B007AD280 /* Images.xcassets in Resources */,
 				9BDE21A31B5AA44C00CEA6F8 /* sorts.plist in Resources */,
+				9B6AE5211B5BAC1700F9286C /* MTDistrictViewController.xib in Resources */,
 				9BDE218C1B5A999000CEA6F8 /* MTHomeLeftTopMenu.xib in Resources */,
 				9BDE21A11B5AA44C00CEA6F8 /* cities.plist in Resources */,
 				9BDE21971B5A9ABC00CEA6F8 /* MTHomeDropdown.xib in Resources */,
@@ -516,7 +549,10 @@
 				9BDE219A1B5AA14D00CEA6F8 /* MTCategoryViewController.m in Sources */,
 				9BDE21E21B5AA56500CEA6F8 /* MJFoundation.m in Sources */,
 				9BDE21E61B5AA56500CEA6F8 /* MJType.m in Sources */,
+				9B6AE5251B5BB36B00F9286C /* MTCityViewController.m in Sources */,
+				9B274B831B5BBF0B008D4394 /* MTCityGroup.m in Sources */,
 				9BDE21DF1B5AA56500CEA6F8 /* View+MASAdditions.m in Sources */,
+				9B6AE5201B5BAC1700F9286C /* MTDistrictViewController.m in Sources */,
 				9BDE21E51B5AA56500CEA6F8 /* MJMethod.m in Sources */,
 				9B6AE5141B5BA50800F9286C /* MTHomeDropdownMainCell.m in Sources */,
 				9BDE21DE1B5AA56500CEA6F8 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -532,7 +568,9 @@
 				9BDE21DD1B5AA56500CEA6F8 /* NSArray+MASAdditions.m in Sources */,
 				9BDE21E11B5AA56500CEA6F8 /* MJConst.m in Sources */,
 				9BDE21DB1B5AA56500CEA6F8 /* MASViewAttribute.m in Sources */,
+				9B274B801B5BBB8E008D4394 /* MTRegion.m in Sources */,
 				9BDE21A61B5AA48700CEA6F8 /* MTCategory.m in Sources */,
+				9B274B7D1B5BBADD008D4394 /* MTCity.m in Sources */,
 				9BDE21E91B5AA56500CEA6F8 /* NSObject+MJKeyValue.m in Sources */,
 				9BDE21D81B5AA56500CEA6F8 /* MASConstraint.m in Sources */,
 			);
