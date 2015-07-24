@@ -73,14 +73,14 @@
         }
 
     }else{
-        static NSString *subID =@"sub-cell";
+        //static NSString *subID =@"sub-cell";
         cell = [MTHomeDropdownSubCell cellWithTableView:tableView];
         
-        if(!cell){
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:subID];
-            cell.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg_dropdown_rightpart"]];
-            cell.selectedBackgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg_dropdown_right_selected"]];
-        }
+//        if(!cell){
+//            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:subID];
+//            cell.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg_dropdown_rightpart"]];
+//            cell.selectedBackgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg_dropdown_right_selected"]];
+//        }
         cell.textLabel.text = self.selectedCategory.subcategories[indexPath.row];
 //        cell.imageView.image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@""]];
         
