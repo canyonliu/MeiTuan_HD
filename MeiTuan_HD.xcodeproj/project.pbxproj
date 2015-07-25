@@ -55,6 +55,8 @@
 		9BDE21E81B5AA56500CEA6F8 /* NSObject+MJCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE21D21B5AA56500CEA6F8 /* NSObject+MJCoding.m */; };
 		9BDE21E91B5AA56500CEA6F8 /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE21D41B5AA56500CEA6F8 /* NSObject+MJKeyValue.m */; };
 		9BDE21EA1B5AA56500CEA6F8 /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE21D61B5AA56500CEA6F8 /* NSObject+MJMember.m */; };
+		9BE5ACFD1B6341D3008AEFAB /* MTCitySearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5ACFC1B6341D3008AEFAB /* MTCitySearchResultViewController.m */; };
+		9BE5AD001B634544008AEFAB /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5ACFF1B634544008AEFAB /* UIView+AutoLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +165,10 @@
 		9BDE21D41B5AA56500CEA6F8 /* NSObject+MJKeyValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJKeyValue.m"; sourceTree = "<group>"; };
 		9BDE21D51B5AA56500CEA6F8 /* NSObject+MJMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MJMember.h"; sourceTree = "<group>"; };
 		9BDE21D61B5AA56500CEA6F8 /* NSObject+MJMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJMember.m"; sourceTree = "<group>"; };
+		9BE5ACFB1B6341D3008AEFAB /* MTCitySearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTCitySearchResultViewController.h; sourceTree = "<group>"; };
+		9BE5ACFC1B6341D3008AEFAB /* MTCitySearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTCitySearchResultViewController.m; sourceTree = "<group>"; };
+		9BE5ACFE1B634544008AEFAB /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		9BE5ACFF1B634544008AEFAB /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +275,8 @@
 				9B6AE5221B5BB36B00F9286C /* MTCityViewController.h */,
 				9B6AE5231B5BB36B00F9286C /* MTCityViewController.m */,
 				9B6AE5241B5BB36B00F9286C /* MTCityViewController.xib */,
+				9BE5ACFB1B6341D3008AEFAB /* MTCitySearchResultViewController.h */,
+				9BE5ACFC1B6341D3008AEFAB /* MTCitySearchResultViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -319,6 +327,8 @@
 		9BDE217B1B5A999000CEA6F8 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				9BE5ACFE1B634544008AEFAB /* UIView+AutoLayout.h */,
+				9BE5ACFF1B634544008AEFAB /* UIView+AutoLayout.m */,
 				9BDE217C1B5A999000CEA6F8 /* UIBarButtonItem+Extension.h */,
 				9BDE217D1B5A999000CEA6F8 /* UIBarButtonItem+Extension.m */,
 				9BDE217E1B5A999000CEA6F8 /* UIView+Extension.h */,
@@ -560,6 +570,7 @@
 				9BDE21DA1B5AA56500CEA6F8 /* MASLayoutConstraint.m in Sources */,
 				9BDE21D91B5AA56500CEA6F8 /* MASConstraintMaker.m in Sources */,
 				9BDE21921B5A999000CEA6F8 /* MTConst.m in Sources */,
+				9BE5AD001B634544008AEFAB /* UIView+AutoLayout.m in Sources */,
 				9BDE218B1B5A999000CEA6F8 /* MTHomeLeftTopMenu.m in Sources */,
 				9BDE21911B5A999000CEA6F8 /* main.m in Sources */,
 				9BDE21E41B5AA56500CEA6F8 /* MJMember.m in Sources */,
@@ -569,6 +580,7 @@
 				9BDE21E11B5AA56500CEA6F8 /* MJConst.m in Sources */,
 				9BDE21DB1B5AA56500CEA6F8 /* MASViewAttribute.m in Sources */,
 				9B274B801B5BBB8E008D4394 /* MTRegion.m in Sources */,
+				9BE5ACFD1B6341D3008AEFAB /* MTCitySearchResultViewController.m in Sources */,
 				9BDE21A61B5AA48700CEA6F8 /* MTCategory.m in Sources */,
 				9B274B7D1B5BBADD008D4394 /* MTCity.m in Sources */,
 				9BDE21E91B5AA56500CEA6F8 /* NSObject+MJKeyValue.m in Sources */,

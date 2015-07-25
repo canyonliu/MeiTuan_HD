@@ -18,27 +18,32 @@
 
 @implementation MTCategoryViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    
+- (void)loadView{
     /**
      *  加载分类的数据
      */
     //1.
-//    NSArray *dictArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"categories.plist" ofType:nil];
-//    NSArray *categories = [MTCategory objectArrayWithKeyValuesArray:dictArray];
+    //    NSArray *dictArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"categories.plist" ofType:nil];
+    //    NSArray *categories = [MTCategory objectArrayWithKeyValuesArray:dictArray];
     
-//    2.
-//    NSArray *categories = [MTCategory objectArrayWithFilename:@"categories.plist"];
+    //    2.
+    //    NSArray *categories = [MTCategory objectArrayWithFilename:@"categories.plist"];
     
     
     MTHomeDropdown *dropDown = [MTHomeDropdown dropdown];
     dropDown.categories = [MTCategory objectArrayWithFilename:@"categories.plist"];
-    [self.view addSubview:dropDown];
+    //[self.view addSubview:dropDown];
+    self.view = dropDown;
     
     // 设置控制器view在popover中的尺寸
     self.preferredContentSize = dropDown.size;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    
+
 }
 
 

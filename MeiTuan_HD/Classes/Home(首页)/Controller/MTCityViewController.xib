@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MTCityViewController">
             <connections>
+                <outlet property="cover" destination="zdE-HG-WP2" id="Qkd-37-9tV"/>
                 <outlet property="searchBar" destination="2Ly-73-E9M" id="LCC-f6-9wU"/>
                 <outlet property="tableView" destination="aHb-eo-Fcu" id="PCO-T8-54R"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -34,6 +35,16 @@
                         <outlet property="delegate" destination="-1" id="UxV-bT-vkg"/>
                     </connections>
                 </searchBar>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdE-HG-WP2">
+                    <rect key="frame" x="0.0" y="60" width="600" height="540"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="coverClick:" destination="-1" eventType="touchUpInside" id="2H8-Nx-baH"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -41,9 +52,13 @@
                 <constraint firstItem="2Ly-73-E9M" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="7kf-q5-9T0"/>
                 <constraint firstItem="aHb-eo-Fcu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AfG-5w-vrB"/>
                 <constraint firstItem="2Ly-73-E9M" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="GlG-tL-gQk"/>
+                <constraint firstAttribute="bottom" secondItem="zdE-HG-WP2" secondAttribute="bottom" id="MbA-Fr-n1g"/>
                 <constraint firstAttribute="trailing" secondItem="aHb-eo-Fcu" secondAttribute="trailing" id="P8y-vC-BnR"/>
                 <constraint firstItem="aHb-eo-Fcu" firstAttribute="top" secondItem="2Ly-73-E9M" secondAttribute="bottom" constant="10" id="Ufv-NY-W0q"/>
                 <constraint firstAttribute="bottom" secondItem="aHb-eo-Fcu" secondAttribute="bottom" id="bcC-9T-O8F"/>
+                <constraint firstItem="zdE-HG-WP2" firstAttribute="top" secondItem="2Ly-73-E9M" secondAttribute="bottom" constant="15" id="oSy-Ny-ofN"/>
+                <constraint firstItem="zdE-HG-WP2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oY1-fz-6w2"/>
+                <constraint firstAttribute="trailing" secondItem="zdE-HG-WP2" secondAttribute="trailing" id="wWn-8h-Vq3"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
