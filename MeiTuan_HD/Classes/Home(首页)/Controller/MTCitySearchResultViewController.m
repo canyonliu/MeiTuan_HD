@@ -7,15 +7,61 @@
 //
 
 #import "MTCitySearchResultViewController.h"
+#import "MTCity.h"
+#import "MJExtension.h"
+#import "MTCityViewController.h"
+#import "MTConst.h"
 
 @interface MTCitySearchResultViewController ()
+@property (nonatomic, strong)NSArray *cities;
+@property (nonatomic, strong)NSArray *resultCities;
 
 @end
 
 @implementation MTCitySearchResultViewController
 
+- (NSArray *)cities{
+    if(!_cities){
+        self.cities = [MTCity objectArrayWithFilename:@"cities.plist"];
+    }
+    return _cities;
+}
+
+- (void)setSearchText:(NSString *)searchText{
+    _searchText = [searchText copy];
+    
+    searchText = searchText.lowercaseString;
+    
+
+    
+    
+//    self.resultCities = [NSMutableArray array];
+    //根据关键字搜索城市数据
+    
+//    1.直接遍历
+    
+//    for(MTCity *city in self.cities){
+//        //city里面的数据本身就是小写
+//        if([city.name containsString:searchText] || [city.pinYinHead containsString:searchText] || [city.pinYin containsString:searchText]){
+//            [self.resultCities addObject:city];
+//        }
+//    }
+    
+    //2.谓词/过滤器:能利用一定的条件从一个数组中过滤出想要的数据
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains %@ or pinYin contains %@ or pinYinHead contains %@",searchText,searchText,searchText];
+    self.resultCities = [self.cities filteredArrayUsingPredicate:predicate];
+    
+    
+    
+    
+    
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -31,70 +77,46 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//#warning Potentially incomplete method implementation.
+//    // Return the number of sections.
+//    return 0;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.resultCities.count;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//}
+
+-(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *ID =@"city";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
-    // Configure the cell...
-    
+    if(!cell){
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+    }
+    MTCity *city = self.resultCities[indexPath.row];
+    cell.textLabel.text = city.name;
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return [NSString stringWithFormat:@"共有%d个搜索结果",self.resultCities.count];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MTCity *city = self.resultCities[indexPath.row];
+    //发出通知
+    [MTNotificationCenter postNotificationName:MTCityDidSelectNotification object:nil userInfo:@{MTSelectCityName : city.name}];
+    
+    //当前控制器销毁
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

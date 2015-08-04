@@ -44,6 +44,10 @@ const int coverTag  = 45;
         //self存在的话,他的子控制器就会存在
         [self addChildViewController:citySearchResult];
         self.citySearchResult = citySearchResult;
+        ///一定要让他们成为父子控制器(父子关系)
+//         citySearchResult.parentViewController == MTCityViewController
+//        self.parentViewControlle == MTNavigationController
+        
         
         //只需要做一次,所以就放在这里(需要时就创建)
         [self.view addSubview:self.citySearchResult.view];
@@ -141,6 +145,7 @@ const int coverTag  = 45;
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if(searchText.length){
         self.citySearchResult.view.hidden = NO;
+        self.citySearchResult.searchText  = searchText;
     }else{
         self.citySearchResult.view.hidden = YES;
     }
@@ -203,6 +208,18 @@ const int coverTag  = 45;
      */
     return [self.cityGroup valueForKey:@"title"];
 }
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MTCityGroup *group = self.cityGroup[indexPath.section];
+    //发出通知
+    [MTNotificationCenter postNotificationName:MTCityDidSelectNotification object:nil userInfo:@{MTSelectCityName : group.cities[indexPath.row]}];
+    //当前控制器销毁
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+
 
 
 - (void)close{

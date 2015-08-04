@@ -42,10 +42,35 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
+    //监听城市的改变,然后刷新本页面
+    [MTNotificationCenter addObserver:self selector:@selector(cityDidSelected:) name:MTCityDidSelectNotification object:nil];
+    
     //设置导航栏内容
     [self setupLeftNav];
     [self setupRightNav];
 }
+
+
+
+#pragma mark -m dealloc 注销通知
+-(void)dealloc{
+    [MTNotificationCenter removeObserver:self];
+}
+
+#pragma mark -m 监听通知
+- (void)cityDidSelected:(NSNotification *)notification{
+    NSString * citySelectedName = notification.userInfo[MTSelectCityName];
+    
+    MTLog(@"首页控制器监听到改变 ---- %@",citySelectedName);
+    //首页顶部buttonItem 的文字图标等发生改变
+    MTHomeLeftTopMenu *topItem = [MTHomeLeftTopMenu item];
+    [topItem setTitle:[NSString stringWithFormat:@"%@ - 全部",citySelectedName]];
+    [topItem setSubTitle:nil];
+    //2.刷新表格数据
+#warning TODO
+    
+}
+
 
 #pragma mark -m 设置左边导航栏内容
 - (void)setupLeftNav{

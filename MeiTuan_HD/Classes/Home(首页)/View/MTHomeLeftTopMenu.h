@@ -18,4 +18,18 @@
  */
 -(void)addTarget:(id)target action:(SEL)action;
 
+
+//别人即可以设置,又可以访问
+//@property (nonatomic, copy)NSString *title;
+//
+//@property (nonatomic, copy)NSString *subTitle;
+
+//只允许别人设置,不允许别人访问
+-(void)setTitle:(NSString *)title;
+-(void)setSubTitle:(NSString *)subTitle;
+
+-(void)setIcon:(NSString *)icon highlighedIcon:(NSString *)highlighedIcon;
+
+
+
 @end

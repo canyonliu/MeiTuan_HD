@@ -10,19 +10,12 @@
 
 @interface MTCategory : NSObject
 
-@property (nonatomic, strong)NSArray *subcategories;
-
-
-@property (nonatomic, copy)NSString *name;
-
-@property (nonatomic, copy)NSString *small_highlighted_icon;
-
-@property (nonatomic, copy)NSString *small_icon;
 
 @property (nonatomic, copy)NSString *highlighted_icon;
-
 @property (nonatomic, copy)NSString *icon;
-
 @property (nonatomic, copy)NSString *map_icon;
-
+@property (nonatomic, copy)NSString *name;
+@property (nonatomic, copy)NSString *small_highlighted_icon;
+@property (nonatomic, copy)NSString *small_icon;
+@property (nonatomic, strong)NSArray *subcategories;
 @end
