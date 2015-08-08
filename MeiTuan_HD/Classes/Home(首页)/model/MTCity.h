@@ -15,7 +15,7 @@
 @property (nonatomic, copy)NSString *pinYin;
 /** 城市名字的拼音声母*/
 @property (nonatomic, copy)NSString *pinYinHead;
-/** 城市的区域(存放的是MTregion模型)*/
+/** 城市的区域(存放的是MTRegion模型)*/
 @property (nonatomic, strong)NSArray *regions;
 
 @end

@@ -10,10 +10,14 @@
 
 @interface MTRegion : NSObject
 
-
+/**
+ *  区域名字
+ */
 @property (nonatomic, copy)NSString *name;
-
-@property (nonatomic, copy)NSString *subRegions;
+/**
+ *  区域子数据
+ */
+@property (nonatomic, strong)NSArray *subregions;
 
 
 @end

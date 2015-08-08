@@ -13,7 +13,7 @@
 @implementation MTCity
 
 - (NSDictionary *)objectClassInArray{
-    return @{@"regions": [MTRegion class]};
+    return @{@"regions" : [MTRegion class]};
 }
 
 @end

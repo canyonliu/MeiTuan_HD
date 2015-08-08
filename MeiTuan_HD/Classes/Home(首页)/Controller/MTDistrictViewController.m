@@ -16,8 +16,10 @@
 #import "MTHomeDropdown.h"
 #import "MTCityViewController.h"
 #import "MTNavigationController.h"
+#import "MTMetalTool.h"
+#import "MTRegion.h"
 
-@interface MTDistrictViewController ()
+@interface MTDistrictViewController ()<MTHomeDropdownDataSource>
 - (IBAction)changeCity;
 
 @end
@@ -29,6 +31,9 @@
     
     UIView *titleView = [self.view.subviews firstObject];
     MTHomeDropdown *dropdown = [MTHomeDropdown dropdown];
+    
+    dropdown.datasource = self;
+    
     dropdown.y = titleView.height;
     [self.view addSubview:dropdown];
     
@@ -44,4 +49,38 @@
     navVC.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:navVC animated:YES completion:nil];
 }
+
+
+
+#pragma mark - 实现MTHomeDropdownDataSource
+
+
+-(NSInteger)numberOfRowsInMainTable:(MTHomeDropdown *)homeDropdown{
+    return  self.regions.count;
+}
+
+
+-(NSString *)homeDropdown:(MTHomeDropdown *)homeDropdown titleForRowInMainTable:(int)row{
+    MTRegion *region = self.regions[row];
+    return region.name;
+}
+//-(NSString *)homeDropdown:(MTHomeDropdown *)homeDropdown iconForRowInMainTable:(int)row{
+//    //MTRegion *region = self.regions[row];
+//    return nil;
+//
+//}
+//-(NSString *)homeDropdown:(MTHomeDropdown *)homeDropdown selectedIconForRowInMainTable:(int)row{
+//    //MTRegion *region = self.regions[row];
+//    return nil;
+//
+//}
+-(NSArray *)homeDropdown:(MTHomeDropdown *)homeDropdown subdataForRowInMainTable:(int)row{
+    MTRegion *region = self.regions[row];
+    NSLog(@"......%@",region.subregions);
+ 
+    return region.subregions;
+
+}
+
+
 @end

@@ -8,24 +8,19 @@
 
 #import "MTCitySearchResultViewController.h"
 #import "MTCity.h"
-#import "MJExtension.h"
 #import "MTCityViewController.h"
 #import "MTConst.h"
 
+#import "MTMetalTool.h"
+
 @interface MTCitySearchResultViewController ()
-@property (nonatomic, strong)NSArray *cities;
 @property (nonatomic, strong)NSArray *resultCities;
 
 @end
 
 @implementation MTCitySearchResultViewController
 
-- (NSArray *)cities{
-    if(!_cities){
-        self.cities = [MTCity objectArrayWithFilename:@"cities.plist"];
-    }
-    return _cities;
-}
+
 
 - (void)setSearchText:(NSString *)searchText{
     _searchText = [searchText copy];
@@ -49,7 +44,7 @@
     
     //2.谓词/过滤器:能利用一定的条件从一个数组中过滤出想要的数据
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains %@ or pinYin contains %@ or pinYinHead contains %@",searchText,searchText,searchText];
-    self.resultCities = [self.cities filteredArrayUsingPredicate:predicate];
+    self.resultCities = [[MTMetalTool cities] filteredArrayUsingPredicate:predicate];
     
     
     

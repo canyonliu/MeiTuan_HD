@@ -7,7 +7,7 @@
 //
 
 #import "MTHomeDropdown.h"
-#import "MTCategory.h"
+//#import "MTCategory.h"
 #import "MTHomeDropdownMainCell.h"
 #import "MTHomeDropdownSubCell.h"
 
@@ -15,9 +15,11 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (weak, nonatomic) IBOutlet UITableView *subTableView;
+/**左边主表选中的行号*/
+@property (nonatomic, assign)NSInteger selectedMainRow;
 
 
-@property (nonatomic, strong)MTCategory *selectedCategory;
+//@property (nonatomic, strong)MTCategory *selectedCategory;
 
 @end
 
@@ -28,12 +30,12 @@
     return [[[NSBundle mainBundle]loadNibNamed:@"MTHomeDropdown" owner:nil options:nil]firstObject];
 }
 
--(void)setCategories:(NSArray *)categories{
-    _categories = categories;
-    //刷新数据
-    [self.mainTableView reloadData];
-    
-}
+//-(void)setCategories:(NSArray *)categories{
+//    _categories = categories;
+//    //刷新数据
+//    [self.mainTableView reloadData];
+//    
+//}
 
 - (void)awakeFromNib
 {
@@ -46,9 +48,9 @@
 #pragma mark -m 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(tableView == self.mainTableView){
-        return self.categories.count;
+        return [self.datasource numberOfRowsInMainTable:self];
     }else{
-        return self.selectedCategory.subcategories.count;
+        return [self.datasource homeDropdown:self subdataForRowInMainTable:self.selectedMainRow].count;
     }
     
 }
@@ -60,11 +62,18 @@
     if(tableView == self.mainTableView){
         cell = [MTHomeDropdownMainCell cellWithTableView:tableView];
         //显示文字
-        MTCategory *category = self.categories[indexPath.row];
-        cell.textLabel.text = category.name;
-        cell.imageView.image = [UIImage imageNamed:category.small_icon];
+//        MTCategory *category = self.categories[indexPath.row];
+        cell.textLabel.text = [self.datasource homeDropdown:self titleForRowInMainTable:indexPath.row];
         
-        if(category.subcategories.count){
+        
+#warning 要修改
+/***************************/
+//        cell.imageView.image = [UIImage imageNamed:[self.datasource homeDropdown:self iconForRowInMainTable:indexPath.row]];
+//        cell.imageView.highlightedImage = [UIImage imageNamed:[self.datasource homeDropdown:self selectedIconForRowInMainTable:indexPath.row]];
+        
+/***************************/
+        NSArray *subdata = [self.datasource homeDropdown:self subdataForRowInMainTable:indexPath.row];
+        if(subdata.count){
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
         }else{
@@ -72,7 +81,7 @@
             
         }
 
-    }else{
+    }else{  ///从表
         //static NSString *subID =@"sub-cell";
         cell = [MTHomeDropdownSubCell cellWithTableView:tableView];
         
@@ -81,7 +90,8 @@
 //            cell.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg_dropdown_rightpart"]];
 //            cell.selectedBackgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg_dropdown_right_selected"]];
 //        }
-        cell.textLabel.text = self.selectedCategory.subcategories[indexPath.row];
+        NSArray *subdata = [self.datasource homeDropdown:self subdataForRowInMainTable:self.selectedMainRow];
+        cell.textLabel.text = subdata[indexPath.row];
 //        cell.imageView.image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@""]];
         
         
@@ -99,7 +109,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(tableView  == self.mainTableView){
-        self.selectedCategory = self.categories[indexPath.row];
+//        self.selectedCategory = self.categories[indexPath.row];
+        self.selectedMainRow = indexPath.row;
         [self.subTableView reloadData];
     }
     

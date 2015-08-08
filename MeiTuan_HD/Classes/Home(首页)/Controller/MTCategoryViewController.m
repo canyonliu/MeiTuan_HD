@@ -11,8 +11,9 @@
 #import "MTCategory.h"
 #import "MJExtension.h"
 #import "UIView+Extension.h"
+#import "MTMetalTool.h"
 
-@interface MTCategoryViewController ()
+@interface MTCategoryViewController ()<MTHomeDropdownDataSource>
 
 @end
 
@@ -31,7 +32,11 @@
     
     
     MTHomeDropdown *dropDown = [MTHomeDropdown dropdown];
-    dropDown.categories = [MTCategory objectArrayWithFilename:@"categories.plist"];
+    dropDown.datasource = self;
+    
+    
+    
+//    dropDown.categories = [MTCategory objectArrayWithFilename:@"categories.plist"];
     //[self.view addSubview:dropDown];
     self.view = dropDown;
     
@@ -46,6 +51,28 @@
 
 }
 
+
+-(NSInteger)numberOfRowsInMainTable:(MTHomeDropdown *)homeDropdown{
+    return  [MTMetalTool categories].count;
+}
+
+
+-(NSString *)homeDropdown:(MTHomeDropdown *)homeDropdown titleForRowInMainTable:(int)row{
+    MTCategory *category = [MTMetalTool categories][row];
+    return category.name;
+}
+-(NSString *)homeDropdown:(MTHomeDropdown *)homeDropdown iconForRowInMainTable:(int)row{
+    MTCategory *category = [MTMetalTool categories][row];
+    return category.small_icon;
+}
+-(NSString *)homeDropdown:(MTHomeDropdown *)homeDropdown selectedIconForRowInMainTable:(int)row{
+    MTCategory *category = [MTMetalTool categories][row];
+    return category.small_highlighted_icon;
+}
+-(NSArray *)homeDropdown:(MTHomeDropdown *)homeDropdown subdataForRowInMainTable:(int)row{
+    MTCategory *category = [MTMetalTool categories][row];
+    return category.subcategories;
+}
 
 
 

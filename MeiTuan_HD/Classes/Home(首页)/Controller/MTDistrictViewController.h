@@ -10,4 +10,6 @@
 
 @interface MTDistrictViewController : UIViewController
 
+@property (nonatomic, strong)NSArray *regions;
+
 @end

@@ -13,6 +13,9 @@
 #import "MTHomeLeftTopMenu.h"
 #import "MTCategoryViewController.h"
 #import "MTDistrictViewController.h"
+#import "MTMetalTool.h"
+#import "MTCity.h"
+#import "MTRegion.h"
 
 
 @interface MTHomeViewController ()
@@ -21,7 +24,8 @@
 @property (nonatomic ,weak) UIBarButtonItem  *districtMenu;
 @property (nonatomic ,weak) UIBarButtonItem  *sortMenu;
 
-@property (nonatomic, strong) UIPopoverController *popover;
+//@property (nonatomic, strong) UIPopoverController *popover;
+@property (nonatomic ,copy) NSString  *selectedCityName ;                    ;
 
 @end
 
@@ -60,11 +64,12 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark -m 监听通知
 - (void)cityDidSelected:(NSNotification *)notification{
     NSString * citySelectedName = notification.userInfo[MTSelectCityName];
+    self.selectedCityName = citySelectedName;
     
     MTLog(@"首页控制器监听到改变 ---- %@",citySelectedName);
     //首页顶部buttonItem 的文字图标等发生改变
     MTHomeLeftTopMenu *topItem = [MTHomeLeftTopMenu item];
-    [topItem setTitle:[NSString stringWithFormat:@"%@ - 全部",citySelectedName]];
+    [topItem setTitle:[NSString stringWithFormat:@"%@ - 全部",self.selectedCityName]];
     [topItem setSubTitle:nil];
     //2.刷新表格数据
 #warning TODO
@@ -126,13 +131,27 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)districtClicked{
     
-    UIPopoverController *popover = [[UIPopoverController alloc]initWithContentViewController:[[MTDistrictViewController alloc]init] ];
+    MTDistrictViewController *district = [[MTDistrictViewController alloc]init];
+    
+    if(self.selectedCityName){
+        //获取当前选中城市的区域
+        MTCity *city =  [[[MTMetalTool cities] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name = %@",self.selectedCityName]] firstObject];
+//        MTRegion *region = city.regions[1];
+//        NSLog(@"%@,,,,ssss",region.subRegions);
+        district.regions = city.regions;
+
+    }
+    
+    UIPopoverController *popover = [[UIPopoverController alloc]initWithContentViewController:district];
     
     [popover presentPopoverFromBarButtonItem:self.districtMenu permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)sortClicked{
-    
+//    // 显示排序菜单
+//    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[[MTSortViewController alloc] init]];
+//    [popover presentPopoverFromBarButtonItem:self.sortItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+
 }
 
 
