@@ -41,6 +41,12 @@
  */
 - (NSString *)homeDropdown:(MTHomeDropdown *)homeDropdown titleForRowInMainTable:(int)row;
 /**
+ *  左边每一行的子数据
+ */
+- (NSArray *)homeDropdown:(MTHomeDropdown *)homeDropdown subdataForRowInMainTable:(int)row;
+
+@optional
+/**
  *  左边每一行的图标
  */
 - (NSString *)homeDropdown:(MTHomeDropdown *)homeDropdown iconForRowInMainTable:(int)row;
@@ -48,15 +54,26 @@
  *  左边每一行的选中图标
  */
 - (NSString *)homeDropdown:(MTHomeDropdown *)homeDropdown selectedIconForRowInMainTable:(int)row;
+
+
+
+
+@end
+
+
+@protocol MTHomeDropdownDelegate <NSObject>
+
+@optional
 /**
- *  左边每一行的子数据
+ *  点击主表的某一行
+ *通过代理告诉上层成为我的代理的人点击了那一行
  */
-- (NSArray *)homeDropdown:(MTHomeDropdown *)homeDropdown subdataForRowInMainTable:(int)row;
-
-
-
-
-
+- (void)homeDropdown:(MTHomeDropdown *)homeDropdown didSelectedRowInMainTable:(int)row;
+/**
+ *  点击从表的某一行
+ *通过代理告诉上层成为我的代理的人点击了那一行
+ */
+- (void)homeDropdown:(MTHomeDropdown *)homeDropdown didSelectedRowInSubTable:(int)row inMainTable:(int)mainRow;
 @end
 
 
@@ -66,6 +83,7 @@
 +(instancetype)dropdown;
 @property (nonatomic ,weak) id<MTHomeDropdownDataSource>datasource;
 
+@property (nonatomic ,weak) id<MTHomeDropdownDelegate>delegate;
 
 //@property (nonatomic, strong)NSArray *categories;
 

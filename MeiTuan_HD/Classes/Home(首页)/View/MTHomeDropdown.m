@@ -64,14 +64,16 @@
         //显示文字
 //        MTCategory *category = self.categories[indexPath.row];
         cell.textLabel.text = [self.datasource homeDropdown:self titleForRowInMainTable:indexPath.row];
-        
-        
-#warning 要修改
-/***************************/
-//        cell.imageView.image = [UIImage imageNamed:[self.datasource homeDropdown:self iconForRowInMainTable:indexPath.row]];
-//        cell.imageView.highlightedImage = [UIImage imageNamed:[self.datasource homeDropdown:self selectedIconForRowInMainTable:indexPath.row]];
-        
-/***************************/
+        /**
+         *  因为是可选的方法,所以要这样使用
+         */
+        if([self.datasource respondsToSelector:@selector(homeDropdown:iconForRowInMainTable:)]){
+        cell.imageView.image = [UIImage imageNamed:[self.datasource homeDropdown:self iconForRowInMainTable:indexPath.row]];
+        }
+         if([self.datasource respondsToSelector:@selector(homeDropdown:selectedIconForRowInMainTable:)]){
+        cell.imageView.highlightedImage = [UIImage imageNamed:[self.datasource homeDropdown:self selectedIconForRowInMainTable:indexPath.row]];
+         }
+
         NSArray *subdata = [self.datasource homeDropdown:self subdataForRowInMainTable:indexPath.row];
         if(subdata.count){
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -112,7 +114,13 @@
 //        self.selectedCategory = self.categories[indexPath.row];
         self.selectedMainRow = indexPath.row;
         [self.subTableView reloadData];
-    }
+        if([self.delegate respondsToSelector:@selector(homeDropdown:didSelectedRowInMainTable:)]){
+            [self.delegate homeDropdown:self didSelectedRowInMainTable:indexPath.row];
+        }
+    }else{///点击了从表的行
+        if ([self.delegate respondsToSelector:@selector(homeDropdown:didSelectedRowInSubTable:inMainTable:)]) {
+            [self.delegate homeDropdown:self didSelectedRowInSubTable:indexPath.row inMainTable:self.selectedMainRow];
+        }    }
     
 
     

@@ -10,6 +10,7 @@
 #import "MTCity.h"
 #import "MJExtension.h"
 #import "MTCategory.h"
+#import "MTSort.h"
 
 @implementation MTMetalTool
 static NSArray *_cities;
@@ -31,6 +32,16 @@ static NSArray *_categories;
     }
     return _categories;
 }
+
+static NSArray *_sorts;
+
++(NSArray *)sorts{
+    if(_sorts == nil){
+        _sorts = [MTSort objectArrayWithFilename:@"sorts.plist"];
+    }
+    return _sorts;
+}
+
 
 
 @end

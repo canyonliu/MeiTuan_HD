@@ -12,3 +12,19 @@
 
 extern NSString *const MTCityDidSelectNotification;
 extern NSString *const MTSelectCityName;
+
+
+
+extern NSString *const MTSortDidChangeNotification;
+extern NSString *const MTSelectSortName;
+
+extern NSString *const MTCategoryDidChangeNotification;
+extern NSString *const MTSelectCategoryName;
+extern NSString *const MTSelectSubCategoryName;
+
+extern NSString *const MTRegionDidChangeNotification;
+extern NSString *const MTSelectRegionName;
+extern NSString *const MTSelectSubRegionName;
+
+
+

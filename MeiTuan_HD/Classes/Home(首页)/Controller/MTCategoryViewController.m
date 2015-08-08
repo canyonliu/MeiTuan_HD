@@ -12,8 +12,9 @@
 #import "MJExtension.h"
 #import "UIView+Extension.h"
 #import "MTMetalTool.h"
+#import "MTConst.h"
 
-@interface MTCategoryViewController ()<MTHomeDropdownDataSource>
+@interface MTCategoryViewController ()<MTHomeDropdownDataSource,MTHomeDropdownDelegate>
 
 @end
 
@@ -33,7 +34,7 @@
     
     MTHomeDropdown *dropDown = [MTHomeDropdown dropdown];
     dropDown.datasource = self;
-    
+    dropDown.delegate = self;
     
     
 //    dropDown.categories = [MTCategory objectArrayWithFilename:@"categories.plist"];
@@ -51,7 +52,7 @@
 
 }
 
-
+#pragma mark - 实现MTHomeDropdownDatasource
 -(NSInteger)numberOfRowsInMainTable:(MTHomeDropdown *)homeDropdown{
     return  [MTMetalTool categories].count;
 }
@@ -74,6 +75,31 @@
     return category.subcategories;
 }
 
+
+#pragma mark - 实现MTHomeDropdownDelegate
+
+- (void)homeDropdown:(MTHomeDropdown *)homeDropdown didSelectedRowInMainTable:(int)row{
+    MTCategory *category = [MTMetalTool categories][row];
+    if(category.subcategories.count == 0){
+        //发出菜单栏分类没有子数据的数据被点击的通知
+        //把模型字典发出去
+        [MTNotificationCenter postNotificationName:MTCategoryDidChangeNotification object:nil userInfo:@{MTSelectCategoryName : category}];
+        
+    }
+    
+    NSLog(@"%@",category.name);
+}
+
+-(void)homeDropdown:(MTHomeDropdown *)homeDropdown didSelectedRowInSubTable:(int)row inMainTable:(int)mainRow{
+    MTCategory *category = [MTMetalTool categories][mainRow];
+    
+    //发出通知
+    [MTNotificationCenter postNotificationName:MTCategoryDidChangeNotification object:nil userInfo:@{MTSelectCategoryName : category , MTSelectSubCategoryName:category.subcategories[row]}];
+    
+    
+    NSLog(@"..%@..",category.subcategories[row]);
+    
+}
 
 
 @end

@@ -1,5 +1,5 @@
 //
-//  MTDistrictViewController.h
+//  MTRegionViewController.h
 //  MeiTuan_HD
 //
 //  Created by WayneLiu on 15/7/19.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MTDistrictViewController : UIViewController
+@interface MTRegionViewController : UIViewController
 
 @property (nonatomic, strong)NSArray *regions;
-
+@property (nonatomic ,weak) UIPopoverController *popover;
 @end

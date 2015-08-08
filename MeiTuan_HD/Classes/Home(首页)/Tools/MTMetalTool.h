@@ -20,4 +20,9 @@
  */
 + (NSArray *)categories;
 
+
+/**
+ *  返回排序数据
+ */
++ (NSArray *)sorts;
 @end
