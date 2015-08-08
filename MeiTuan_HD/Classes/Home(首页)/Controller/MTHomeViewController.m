@@ -19,16 +19,24 @@
 #import "MTRegion.h"
 #import "MTSort.h"
 #import "MTCategory.h"
+#import "DPAPI.h"
 
 
-@interface MTHomeViewController ()
+@interface MTHomeViewController ()<DPRequestDelegate>
 
 @property (nonatomic ,weak) UIBarButtonItem  *categoryMenu;
 @property (nonatomic ,weak) UIBarButtonItem  *regionMenu;
 @property (nonatomic ,weak) UIBarButtonItem  *sortMenu;
 
 //@property (nonatomic, strong) UIPopoverController *popover;
-@property (nonatomic ,copy) NSString  *selectedCityName ;                    ;
+/**选中的城市名字****/
+@property (nonatomic ,copy) NSString  *selectedCityName ;
+/**选中的分类名字****/
+@property (nonatomic ,copy) NSString  *selectedCategoryName ;
+/**选中的区域名字****/
+@property (nonatomic ,copy) NSString  *selectedRegionName ;
+/**选中的排序****/
+@property (nonatomic ,strong) MTSort  *selectedSort;
 
 /** 排序的popover */
 @property (nonatomic, strong) UIPopoverController *sortPopover;
@@ -90,27 +98,28 @@ static NSString * const reuseIdentifier = @"Cell";
     [topItem setTitle:[NSString stringWithFormat:@"%@ - 全部",self.selectedCityName]];
     [topItem setSubTitle:nil];
     //2.关闭popover
-    [self.regionPopover dismissPopoverAnimated:YES];
+    //[self.regionPopover dismissPopoverAnimated:YES];
     
     //3.刷新表格数据
-#warning TODO
+    [self loadNewDeals];
+    
     
 }
 
 #pragma mark -m 监听排序改变通知
 - (void)sortDidSelected:(NSNotification *)notification{
     //1.修改顶部排序item的改变
-    MTSort *sort = notification.userInfo[MTSelectSortName];
+    self.selectedSort = notification.userInfo[MTSelectSortName];
         //首页顶部buttonItem 的文字图标等发生改变
     MTHomeLeftTopMenu *topItem = (MTHomeLeftTopMenu *)self.sortMenu.customView;
-    [topItem setSubTitle:sort.label];
+    [topItem setSubTitle:self.selectedSort.label];
     
     //2.关闭popover
     [self.sortPopover dismissPopoverAnimated:YES];
     
     
     //3.刷新表格数据
-#warning TODO
+    [self loadNewDeals];
 
 }
 
@@ -119,6 +128,24 @@ static NSString * const reuseIdentifier = @"Cell";
     //1.修改顶部排序item的改变
     MTCategory *category = notification.userInfo[MTSelectCategoryName];
     NSString *subcategoryname = notification.userInfo[MTSelectSubCategoryName];
+    if (subcategoryname == nil || [subcategoryname isEqualToString:@"全部"]) {
+        self.selectedCategoryName = category.name;
+    }else{
+        self.selectedCategoryName = subcategoryname;
+    }
+    if([self.selectedCategoryName isEqualToString:@"全部分类"]){
+        self.selectedCategoryName = nil;
+    }
+    
+//    if((subcategoryname == nil || [subcategoryname isEqualToString:@"全部"]) && ![category.name isEqualToString:@"全部分类"]){
+//        self.selectedCategoryName = category.name;
+//    }else{
+//        self.selectedCategoryName = nil;
+//    }
+   
+    
+    
+    
     //首页顶部buttonItem 的文字图标等发生改变
     MTHomeLeftTopMenu *topItem = (MTHomeLeftTopMenu *)self.categoryMenu.customView;
     
@@ -132,7 +159,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     
     //3.刷新表格数据
-#warning TODO
+    [self loadNewDeals];
     
 }
 
@@ -149,13 +176,58 @@ static NSString * const reuseIdentifier = @"Cell";
 //    [topItem setIcon:category.icon highlighedIcon:category.highlighted_icon];
     
     
+    if (subregionname == nil || [subregionname isEqualToString:@"全部"]) {
+        self.selectedRegionName = region.name;
+    }else{
+        self.selectedRegionName = subregionname;
+    }
+    if([self.selectedCategoryName isEqualToString:@"全部"]){
+        self.selectedCategoryName = nil;
+    }
+    
     //2.关闭popover
     [self.regionPopover dismissPopoverAnimated:YES];
     
     
     //3.刷新表格数据
-#warning TODO
+    [self loadNewDeals];
     
+}
+
+
+#pragma mark -m 刷新表格数据(跟服务器交互)
+- (void)loadNewDeals{
+    DPAPI *api = [[DPAPI alloc]init];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //城市
+    params[@"city"] = self.selectedCityName;
+    //分类
+    if(self.selectedCategoryName){
+    params[@"category"] = self.selectedCategoryName;
+    }
+    
+    //每页的条数
+    params[@"limit"] = @5;
+    //排序
+    if(self.selectedSort){
+    params[@"sort"] = @(self.selectedSort.value);
+    }
+    //区域
+    if(self.selectedRegionName){
+        params[@"region"] = self.selectedRegionName;
+    }
+    
+    [api requestWithURL:@"v1/deal/find_deals" params:params delegate:self];
+
+    MTLog(@"请求参数是:::: %@",params);
+}
+
+-(void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result{
+    MTLog(@"请求成功 --- %@",result);
+}
+
+-(void)request:(DPRequest *)request didFailWithError:(NSError *)error{
+     MTLog(@"请求失败 --- %@",error);
 }
 
 
