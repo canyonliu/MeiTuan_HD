@@ -28,4 +28,7 @@
 /** 小尺寸团购图片链接，最大图片尺寸160×100 */
 @property (copy, nonatomic) NSString *s_image_url;
 
+/** 团购发布的日期 */
+@property (copy, nonatomic) NSString *publish_date;
+
 @end

@@ -23,6 +23,7 @@
 #import "MJExtension.h"
 #import "MTDeal.h"
 #import "MTDealCell.h"
+#import "MJRefresh.h"
 
 
 @interface MTHomeViewController ()<DPRequestDelegate>
@@ -50,7 +51,10 @@
 
 /** 所有的团购数据*/
 @property (nonatomic, strong)NSMutableArray *deals;
-
+/**  记录当前页码*/
+@property (nonatomic, assign)int currentPage;
+/**  保存最后一个请求*/
+@property (nonatomic ,weak) DPRequest  *lastRequest;
 
 @end
 
@@ -68,7 +72,11 @@ static NSString * const reuseIdentifier = @"deal";
 
 - (instancetype)init{
     UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc]init];
+    //cell的大小
     flowlayout.itemSize = CGSizeMake(305, 305);
+//    在下面监听到频幕旋转的时候在设置内边距
+//    CGFloat inset = 15;
+//    flowlayout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
     return [self initWithCollectionViewLayout:flowlayout];
 }
 
@@ -79,6 +87,8 @@ static NSString * const reuseIdentifier = @"deal";
     self.collectionView.backgroundColor = MTColor(233, 233, 233);
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"MTDealCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
+    //让collectionView的竖直方向永远有弹簧效果
+    self.collectionView.alwaysBounceVertical = YES;
     
     //监听城市的改变,然后刷新本页面
     [MTNotificationCenter addObserver:self selector:@selector(cityDidSelected:) name:MTCityDidSelectNotification object:nil];
@@ -94,6 +104,10 @@ static NSString * const reuseIdentifier = @"deal";
     //设置导航栏内容
     [self setupLeftNav];
     [self setupRightNav];
+    
+    
+    //添加上拉加载更多(这个应用添加下拉刷新的意义不大)
+    [self.collectionView addFooterWithTarget:self action:@selector(loadMoreDeals)];
 }
 
 
@@ -101,6 +115,26 @@ static NSString * const reuseIdentifier = @"deal";
 #pragma mark -m dealloc 注销通知
 -(void)dealloc{
     [MTNotificationCenter removeObserver:self];
+}
+
+
+/**
+ *  当频幕旋转,控制器view的尺寸发生改变调用
+ */
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    MTLog(@"%@",NSStringFromCGSize(size));
+    
+    // 根据屏幕宽度决定列数
+    int cols = (size.width == 1024) ? 3 : 2;
+    
+    // 根据列数计算内边距
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
+    CGFloat inset = (size.width - cols * layout.itemSize.width) / (cols + 1);
+    layout.sectionInset = UIEdgeInsetsMake(inset, inset, inset, inset);
+    
+    // 设置每一行之间的间距
+    layout.minimumLineSpacing = inset;
+
 }
 
 #pragma mark -m 监听城市改变通知
@@ -213,43 +247,68 @@ static NSString * const reuseIdentifier = @"deal";
 
 
 #pragma mark -m 刷新表格数据(跟服务器交互)
-- (void)loadNewDeals{
+
+- (void)loadDeals{
     DPAPI *api = [[DPAPI alloc]init];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //城市
     params[@"city"] = self.selectedCityName;
     //分类
     if(self.selectedCategoryName){
-    params[@"category"] = self.selectedCategoryName;
+        params[@"category"] = self.selectedCategoryName;
     }
     
     //每页的条数
     params[@"limit"] = @5;
     //排序
     if(self.selectedSort){
-    params[@"sort"] = @(self.selectedSort.value);
+        params[@"sort"] = @(self.selectedSort.value);
     }
     //区域
     if(self.selectedRegionName){
         params[@"region"] = self.selectedRegionName;
     }
+    //页码
+    params[page] = @(self.currentPage);
     
-    [api requestWithURL:@"v1/deal/find_deals" params:params delegate:self];
-
+    self.lastRequest = [api requestWithURL:@"v1/deal/find_deals" params:params delegate:self];
+    
     MTLog(@"请求参数是:::: %@",params);
+    
+}
+
+- (void)loadMoreDeals{
+    self.currentPage++;
+    [self loadDeals];
+}
+
+
+- (void)loadNewDeals{
+    self.currentPage = 1;
+    [self loadDeals];
+   
 }
 
 -(void)request:(DPRequest *)request didFinishLoadingWithResult:(id)result{
 //    MTLog(@"请求成功 --- %@",result);
+    if(request != self.lastRequest ){
+        return;
+    }
     
-    // 取出团购的字典数组
+    //1. 取出团购的字典数组
     NSArray *newDeals = [MTDeal objectArrayWithKeyValuesArray:result[@"deals"]];
-    [self.deals removeAllObjects];
+    if (self.currentPage == 1) {
+        //清除之前的旧数据
+        [self.deals removeAllObjects];
+    }
+    
     [self.deals addObjectsFromArray:newDeals];
     MTLog(@"请求成功 --- %@",newDeals);
     
-    
+    //2.刷新表格
     [self.collectionView reloadData];
+    //3,结束上拉加载
+    [self.collectionView footerEndRefreshing];
     
 }
 
@@ -348,6 +407,7 @@ static NSString * const reuseIdentifier = @"deal";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete method implementation -- Return the number of sections
+    [self viewWillTransitionToSize:CGSizeMake(collectionView.width, 0) withTransitionCoordinator:nil];
     return 1;
 }
 
