@@ -24,6 +24,10 @@
 #import "MTDeal.h"
 #import "MTDealCell.h"
 #import "MJRefresh.h"
+#import "MBProgressHUD+MJ.h"
+#import "UIView+AutoLayout.h"
+#import "MTSearchViewController.h"
+#import "MTNavigationController.h"
 
 
 @interface MTHomeViewController ()<DPRequestDelegate>
@@ -53,8 +57,12 @@
 @property (nonatomic, strong)NSMutableArray *deals;
 /**  记录当前页码*/
 @property (nonatomic, assign)int currentPage;
+/**总数**/
+@property (nonatomic, assign)int totalCount;
 /**  保存最后一个请求*/
 @property (nonatomic ,weak) DPRequest  *lastRequest;
+
+@property (nonatomic ,weak) UIImageView  *noDataView;
 
 @end
 
@@ -67,6 +75,19 @@ static NSString * const reuseIdentifier = @"deal";
         self.deals = [[NSMutableArray alloc]init];
     }
     return _deals;
+}
+
+-(UIImageView *)noDataView{
+    if(!_noDataView){
+        
+        //添加一个 "没有数据"的提醒
+            UIImageView *noDataView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_deals_empty"]];
+//            noDataView.hidden = YES;
+            [self.view addSubview:noDataView];
+            [noDataView autoCenterInSuperview];
+            self.noDataView = noDataView;
+    }
+    return _noDataView;
 }
 
 
@@ -89,6 +110,7 @@ static NSString * const reuseIdentifier = @"deal";
     [self.collectionView registerNib:[UINib nibWithNibName:@"MTDealCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     //让collectionView的竖直方向永远有弹簧效果
     self.collectionView.alwaysBounceVertical = YES;
+
     
     //监听城市的改变,然后刷新本页面
     [MTNotificationCenter addObserver:self selector:@selector(cityDidSelected:) name:MTCityDidSelectNotification object:nil];
@@ -106,8 +128,9 @@ static NSString * const reuseIdentifier = @"deal";
     [self setupRightNav];
     
     
-    //添加上拉加载更多(这个应用添加下拉刷新的意义不大)
+    //添加上拉加载更多(这个应用添加下拉刷新的意义不大)(但是后来又添加了下拉刷新)
     [self.collectionView addFooterWithTarget:self action:@selector(loadMoreDeals)];
+    [self.collectionView addHeaderWithTarget:self action:@selector(loadNewDeals)];
 }
 
 
@@ -152,7 +175,8 @@ static NSString * const reuseIdentifier = @"deal";
     //[self.regionPopover dismissPopoverAnimated:YES];
     
     //3.刷新表格数据
-    [self loadNewDeals];
+//    [self loadNewDeals];
+    [self.collectionView headerBeginRefreshing];
     
     
 }
@@ -170,7 +194,8 @@ static NSString * const reuseIdentifier = @"deal";
     
     
     //3.刷新表格数据
-    [self loadNewDeals];
+//    [self loadNewDeals];
+    [self.collectionView headerBeginRefreshing];
 
 }
 
@@ -210,7 +235,8 @@ static NSString * const reuseIdentifier = @"deal";
     
     
     //3.刷新表格数据
-    [self loadNewDeals];
+//    [self loadNewDeals];
+    [self.collectionView headerBeginRefreshing];
     
 }
 
@@ -241,7 +267,8 @@ static NSString * const reuseIdentifier = @"deal";
     
     
     //3.刷新表格数据
-    [self loadNewDeals];
+//    [self loadNewDeals];
+    [self.collectionView headerBeginRefreshing];
     
 }
 
@@ -269,7 +296,7 @@ static NSString * const reuseIdentifier = @"deal";
         params[@"region"] = self.selectedRegionName;
     }
     //页码
-    params[page] = @(self.currentPage);
+    params[@"page"] = @(self.currentPage);
     
     self.lastRequest = [api requestWithURL:@"v1/deal/find_deals" params:params delegate:self];
     
@@ -295,6 +322,7 @@ static NSString * const reuseIdentifier = @"deal";
         return;
     }
     
+    self.totalCount = [result[@"total_count"] intValue];
     //1. 取出团购的字典数组
     NSArray *newDeals = [MTDeal objectArrayWithKeyValuesArray:result[@"deals"]];
     if (self.currentPage == 1) {
@@ -309,11 +337,28 @@ static NSString * const reuseIdentifier = @"deal";
     [self.collectionView reloadData];
     //3,结束上拉加载
     [self.collectionView footerEndRefreshing];
+    [self.collectionView headerEndRefreshing];
+
     
 }
 
 -(void)request:(DPRequest *)request didFailWithError:(NSError *)error{
      MTLog(@"请求失败 --- %@",error);
+    
+    if(request != self.lastRequest ){
+        return;
+    }
+    
+    //1.提醒失败
+#warning  在支持横竖屏的情况下,HUD信息最好不要添加到window上
+    [MBProgressHUD showError:@"网络繁忙,请稍候再试" toView:self.view];
+    //2.结束上拉加载
+    [self.collectionView footerEndRefreshing];
+    [self.collectionView headerEndRefreshing];
+    //3.如果上拉加载失败了
+    if(self.currentPage > 1 ){
+        self.currentPage-- ;
+    }
 }
 
 
@@ -357,7 +402,7 @@ static NSString * const reuseIdentifier = @"deal";
     UIBarButtonItem *mapBar = [UIBarButtonItem itemWithTarget:nil action:nil image:@"icon_map" highImage:@"icon_map_highlighted"];
     mapBar.customView.width = 55;
     
-    UIBarButtonItem *searchBar = [UIBarButtonItem itemWithTarget:nil action:nil image:@"icon_search" highImage:@"icon_search_highlighted"];
+    UIBarButtonItem *searchBar = [UIBarButtonItem itemWithTarget:self action:@selector(searchClicked) image:@"icon_search" highImage:@"icon_search_highlighted"];
     searchBar.customView.width = 55;
     
     self.navigationItem.rightBarButtonItems = @[mapBar,searchBar];
@@ -366,6 +411,12 @@ static NSString * const reuseIdentifier = @"deal";
 
 
 #pragma mark -m 顶部menu的点击方法
+
+
+-(void)searchClicked{
+    MTNavigationController *nav = [[MTNavigationController alloc]initWithRootViewController:[[MTSearchViewController alloc]init]];
+    [self presentViewController:nav animated:YES completion:nil];
+}
 
 - (void)categoryClicked{
 //    MTLog(@"categoryClicked");
@@ -407,7 +458,15 @@ static NSString * const reuseIdentifier = @"deal";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete method implementation -- Return the number of sections
+    //计算一遍内间距
     [self viewWillTransitionToSize:CGSizeMake(collectionView.width, 0) withTransitionCoordinator:nil];
+    
+    //控制尾部刷新控件的显示与隐藏
+    self.collectionView.footerHidden =  self.totalCount == self.deals.count;
+    self.collectionView.headerHidden =  self.totalCount == self.deals.count;
+    //控制"没有数据"时的提醒
+    self.noDataView.hidden = (self.deals.count != 0);
+    
     return 1;
 }
 
