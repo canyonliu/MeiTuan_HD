@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTDealsViewController.h"
 
-@interface MTSearchViewController : UICollectionViewController
+@interface MTSearchViewController : MTDealsViewController
 
 @end
